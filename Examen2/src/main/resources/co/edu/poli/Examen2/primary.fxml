@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxWidth="520.0" prefWidth="520.0" spacing="16.0"
+      style="-fx-background-color: #f4f6f9; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0, 0, 4);"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="co.edu.poli.Examen2.controlador.PrimaryController">
+
+   <padding>
+      <Insets bottom="28.0" left="30.0" right="30.0" top="28.0" />
+   </padding>
+
+   <!-- Título -->
+   <Label text="Registro de Examen"
+          style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;">
+      <font>
+         <Font name="System Bold" size="20.0" />
+      </font>
+   </Label>
+
+   <Separator />
+
+   <!-- Grid de campos -->
+   <GridPane hgap="12.0" vgap="12.0">
+      <padding>
+         <Insets top="2.0" />
+      </padding>
+
+      <!-- Código del Examen -->
+      <Label text="Código del Examen:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+             style="-fx-text-fill: #34495e; -fx-font-weight: bold;">
+         <font><Font size="13.0" /></font>
+      </Label>
+      <TextField fx:id="txtCodigoExamen"
+                 promptText="Ej: EXM-001"
+                 prefWidth="300.0"
+                 style="-fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #bdc3cb; -fx-border-width: 1; -fx-padding: 6 10 6 10;"
+                 GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+      <!-- Nombre del Paciente -->
+      <Label text="Nombre del Paciente:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+             style="-fx-text-fill: #34495e; -fx-font-weight: bold;">
+         <font><Font size="13.0" /></font>
+      </Label>
+      <TextField fx:id="txtNombrePaciente"
+                 promptText="Ingrese el nombre completo"
+                 prefWidth="300.0"
+                 style="-fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #bdc3cb; -fx-border-width: 1; -fx-padding: 6 10 6 10;"
+                 GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+      <!-- Costo -->
+      <Label text="Costo ($):" GridPane.columnIndex="0" GridPane.rowIndex="2"
+             style="-fx-text-fill: #34495e; -fx-font-weight: bold;">
+         <font><Font size="13.0" /></font>
+      </Label>
+      <TextField fx:id="txtCosto"
+                 promptText="Ej: 150.00"
+                 prefWidth="300.0"
+                 style="-fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #bdc3cb; -fx-border-width: 1; -fx-padding: 6 10 6 10;"
+                 GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+      <!-- Tipo de Sangre -->
+      <Label text="Tipo de Sangre:" GridPane.columnIndex="0" GridPane.rowIndex="3"
+             style="-fx-text-fill: #34495e; -fx-font-weight: bold;">
+         <font><Font size="13.0" /></font>
+      </Label>
+      <ComboBox fx:id="cmbTipoSangre"
+                promptText="Seleccione..."
+                prefWidth="300.0"
+                style="-fx-background-radius: 6;"
+                GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <items>
+            <javafx.collections.FXCollections fx:factory="observableArrayList">
+               <String fx:value="A" />
+               <String fx:value="B" />
+               <String fx:value="AB" />
+               <String fx:value="O" />
+            </javafx.collections.FXCollections>
+         </items>
+      </ComboBox>
+
+      <!-- Factor RH -->
+      <Label text="Factor RH:" GridPane.columnIndex="0" GridPane.rowIndex="4"
+             style="-fx-text-fill: #34495e; -fx-font-weight: bold;">
+         <font><Font size="13.0" /></font>
+      </Label>
+      <HBox spacing="20.0" alignment="CENTER_LEFT"
+            GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <RadioButton fx:id="rbPositivo" text="Positivo (Rh+)"
+                      style="-fx-text-fill: #2c3e50;" selected="true">
+            <toggleGroup>
+               <ToggleGroup fx:id="tgFactorRH" />
+            </toggleGroup>
+            <font><Font size="13.0" /></font>
+         </RadioButton>
+         <RadioButton fx:id="rbNegativo" text="Negativo (Rh−)"
+                      toggleGroup="$tgFactorRH"
+                      style="-fx-text-fill: #2c3e50;">
+            <font><Font size="13.0" /></font>
+         </RadioButton>
+      </HBox>
+
+   </GridPane>
+
+   <Separator />
+
+   <!-- Fila 1: Guardar y Limpiar -->
+   <HBox spacing="12.0" alignment="CENTER">
+      <Button fx:id="btnGuardar"
+              text="💾  Guardar"
+              prefWidth="150.0" prefHeight="34.0"
+              onAction="#handleGuardar"
+              style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;">
+         <font><Font size="13.0" /></font>
+      </Button>
+      <Button fx:id="btnListar"
+              text="📋  Listar"
+              prefWidth="150.0" prefHeight="34.0"
+              onAction="#handleListar"
+              style="-fx-background-color: #d35400; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;">
+         <font><Font size="13.0" /></font>
+      </Button>
+      <Button fx:id="btnSerializar"
+              text="📦  Serializar"
+              prefWidth="150.0" prefHeight="34.0"
+              onAction="#handleSerializar"
+              style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;">
+         <font><Font size="13.0" /></font>
+      </Button>
+      <Button fx:id="btnDeserializar"
+              text="📂  Deserializar"
+              prefWidth="150.0" prefHeight="34.0"
+              onAction="#handleDeserializar"
+              style="-fx-background-color: #16a085; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;">
+         <font><Font size="13.0" /></font>
+      </Button>
+   </HBox>
+
+   <Separator />
+
+   <!-- TextArea de resultados -->
+   <Label text="Mensajes:"
+          style="-fx-text-fill: #34495e; -fx-font-weight: bold;">
+      <font><Font size="13.0" /></font>
+   </Label>
+   <TextArea fx:id="txtAreaMensajes"
+             promptText="Los mensajes se mostrarán aquí..."
+             prefHeight="200.0"
+             prefWidth="460.0"
+             editable="false"
+             wrapText="true"
+             style="-fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #bdc3cb; -fx-border-width: 1; -fx-font-size: 12px; -fx-font-family: 'Consolas', monospace;" />
+
+</VBox>
